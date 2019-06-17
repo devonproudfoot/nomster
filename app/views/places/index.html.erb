@@ -1,1 +1,10 @@
-<h1>Testing nomster app</h1>
+<% @places.each do |place| %>
+  <div>
+    <h1><%= place.name %></h1>
+    <br />
+    <h1><%= place.address %></h1>
+    <br />
+    <h1><%= place.description %></h1>
+    <br />
+  </div>
+<% end %>
