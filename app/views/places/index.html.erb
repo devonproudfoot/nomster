@@ -5,3 +5,8 @@
     <p><%= place.description %></p><br />
   </div>
 <% end %>
+<div class="center">
+  <div class="block">
+    <%= will_paginate @places, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+</div>
