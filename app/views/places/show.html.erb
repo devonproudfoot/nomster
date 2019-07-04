@@ -41,10 +41,7 @@
 </div>
 <div class="clear"></div>
 
-<button type="button" class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
-  Add a comment
-</button>
-
+<!-- Modal --->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -69,13 +66,22 @@
 </div>
 
 <br />
-<h1>Comments</h1>
-<% @place.comments.each do |comment| %>
-  <div>
-    <blockquote>
-      <b><%= comment.humanized_rating %></b> -
-        <%= comment.message %>
-      <small><%= comment.user.email %></small>
-    </blockquote>
-  </div>
-<% end %>
+<div class="col-10 offset-1">
+  <h1>Comments</h1>
+  <button type="button" class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
+    Add a comment
+  </button>
+</div>
+<br />
+<div class="clear"></div>
+<div class="row">
+  <% @place.comments.each do |comment| %>
+    <div class="col-12 col-sm-6">
+      <blockquote>
+        <b><%= comment.humanized_rating %></b> -
+          <%= comment.message %>
+        <small><%= comment.user.email %></small>
+      </blockquote>
+    </div>
+  <% end %>
+</div>
