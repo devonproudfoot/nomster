@@ -41,8 +41,8 @@
 </div>
 <div class="clear"></div>
 
-<!-- Modal --->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- start Comment Modal --->
+<div class="modal fade" id="myComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -68,10 +68,58 @@
 <div class="col-10 offset-1">
   <h1>Comments</h1>
   <br />
-  <button type="button" class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
+  <button type="button" class="btn btn-primary btn" data-toggle="modal" data-target="#myComment">
     Add a comment
   </button>
 </div>
+<!-- end comments modal --->
+
+<!-- Start Photo Modal --->
+<div class="modal fade" id="myPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add a photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+        <div class="modal-body">
+        <%= f.input :photograph %>
+        <%= f.input :caption %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Add a photograph", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="col-10 offset-1">
+  <h1>Photographs</h1>
+  <br />
+  <button type="button" class="btn btn-primary btn" data-toggle="modal" data-target="#myPhoto">
+    Add a photo
+  </button>
+</div>
+<!-- end photo modal --->
+
+<!-- start photo display --->
+<div class="clear"></div>
+<div class="row">
+  <% @place.photos.each do |photo| %>
+    <div class="booyah-box col-12 col-sm-6">
+      <%= photo.photograph.url %>
+      <%= photo.caption %>
+    </div>
+  <% end %>
+</div>
+<!-- end photo display --->
+
+<!-- start comment display --->
 <br />
 <div class="clear"></div>
 <div class="row">
@@ -85,3 +133,4 @@
     </div>
   <% end %>
 </div>
+<!-- end comment display --->
