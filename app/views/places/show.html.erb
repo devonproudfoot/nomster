@@ -33,6 +33,10 @@
 
   <% if current_user && current_user == @place.user %>
     <div class="float-right">
+      <button type="button" class="btn btn-primary btn" data-toggle="modal" data-target="#myPhoto">
+        Add a photo
+      </button>
+      <!-- Would eventually like to turn this into link_to --->
       <%= link_to 'Edit', edit_place_path(@place), class: 'btn btn-primary' %>
       <%= link_to 'Delete', place_path(@place), method: :delete, data: {confirm: 'Are you sure you want to delete this?'}, class: 'btn btn-danger' %>
     </div>
@@ -40,6 +44,18 @@
   <% end %>
 </div>
 <div class="clear"></div>
+
+<!-- start photo display --->
+<div class="clear"></div>
+<div>
+  <% @place.photos.each do |photo| %>
+    <div class="booyah-box col-10 col-sm-5 offset-1">
+      <%= image_tag photo.photograph.url, class: "picture" %>
+      <%= photo.caption %>
+    </div>
+  <% end %>
+</div>
+<!-- end photo display --->
 
 <!-- start Comment Modal --->
 <div class="modal fade" id="myComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -65,64 +81,43 @@
   </div>
 </div>
 
-<div class="col-10 offset-1">
+<div class="booyah-box col-10 offset-1">
   <h1>Comments</h1>
   <br />
   <button type="button" class="btn btn-primary btn" data-toggle="modal" data-target="#myComment">
     Add a comment
   </button>
-</div>
-<!-- end comments modal --->
+  <!-- end comments modal --->
 
-<!-- Start Photo Modal --->
-<div class="modal fade" id="myPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add a photo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <!-- Start Photo Modal --->
+  <div class="modal fade" id="myPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add a photo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+          <div class="modal-body">
+          <%= f.input :photograph %>
+          <%= f.input :caption %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= f.submit "Add a photograph", class: 'btn btn-primary' %>
+          </div>
+        <% end %>
       </div>
-      <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
-        <div class="modal-body">
-        <%= f.input :photograph %>
-        <%= f.input :caption %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <%= f.submit "Add a photograph", class: 'btn btn-primary' %>
-        </div>
-      <% end %>
     </div>
   </div>
-</div>
+  <!-- end photo modal --->
 
-<div class="col-10 offset-1">
-  <h1>Photographs</h1>
+  <!-- start comment display --->
   <br />
-  <button type="button" class="btn btn-primary btn" data-toggle="modal" data-target="#myPhoto">
-    Add a photo
-  </button>
-</div>
-<!-- end photo modal --->
-
-<!-- start photo display --->
-<div class="clear"></div>
-<div class="row">
-  <% @place.photos.each do |photo| %>
-    <div class="booyah-box col-12 col-sm-6">
-      <%= photo.photograph.url %>
-      <%= photo.caption %>
-    </div>
-  <% end %>
-</div>
-<!-- end photo display --->
-
-<!-- start comment display --->
-<br />
-<div class="clear"></div>
-<div class="row">
+  <div class="clear"></div>
+  <div class="row">
   <% @place.comments.each do |comment| %>
     <div class="col-12 col-sm-6">
       <blockquote>
