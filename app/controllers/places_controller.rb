@@ -2,7 +2,7 @@ class PlacesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @places = Place.all.paginate(page: params[:page], per_page: 10)
+    @places = Place.all.paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -13,7 +13,7 @@ class PlacesController < ApplicationController
     @place = current_user.places.create(place_params)
 
     if @place.valid?
-      redirect_to root_path
+      redirect_to place_path(@place)
     else
       return render :new, status: :unprocessable_entity
     end
@@ -42,7 +42,7 @@ class PlacesController < ApplicationController
 
     @place.update_attributes(place_params)
     if @place.valid?
-      redirect_to root_path
+      redirect_to place_path(@place)
     else
       return render :edit, status: :unprocessable_entity
     end
