@@ -1,3 +1,10 @@
+<!-- Image banner, how to make this smaller? --->
+<% if @photos.present? %>
+  <div class="col-10 offset-1">
+    <%= image_tag @photos, class: "img-responsive picture" %>
+  </div>
+<% end %>
+
 <% @places.each do |place| %>
   <div class="booyah-box col-10 offset-1">
     <h1><%= link_to place.name, place_path(place) %></h1>
@@ -21,8 +28,11 @@
 
   </div>
 <% end %>
+
+<!-- Paginate navigation start --->
 <div class="center">
   <div class="block">
     <%= will_paginate @places, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
     </div>
 </div>
+<!-- Paginate navigation end --->
