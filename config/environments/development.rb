@@ -13,7 +13,7 @@ Rails.application.configure do
     password: ENV['GMAIL_PASSWORD']
   }
 
-  #config.action_mailer.default_url_options = { host: 'localhost:3030'}
+  config.action_mailer.default_url_options = { host: 'localhost:3030'}
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
