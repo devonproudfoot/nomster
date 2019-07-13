@@ -1,3 +1,4 @@
+<!-- start user statistics --->
 <div class="booyah-box">
   <div class="row">
     <div class="col-4">
@@ -13,3 +14,21 @@
   </div>
   <div class="clear"></div>
 </div>
+<br />
+<!-- end user statistics --->
+
+<!-- start user comments --->
+<h1 class="text-center">My Comments</h1>
+<br />
+<div class="row">
+  <% @user.comments.each do |comment| %>
+    <div class="col-12 col-sm-6">
+        <h2 class="text-center"><%= link_to comment.place.name, place_path(comment.place) %></h2>
+        <blockquote>
+          <b><%= comment.humanized_rating %></b> -
+            <%= comment.message %>
+        </blockquote>
+      </div>
+  <% end %>
+</div>
+<!-- end user comments -->
