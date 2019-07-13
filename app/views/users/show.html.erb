@@ -17,8 +17,25 @@
 <br />
 <!-- end user statistics --->
 
+<!-- start user courts --->
+<h1 class="text-center"><i>My Courts</i></h1>
+<br />
+<% @user.places.each do |place| %>
+  <div class="booyah-box col-10 offset-1">
+    <h1><%= link_to place.name, place_path(place) %></h1>
+    <i><%= place.address %></i><br /><br />
+    <%= place.description %><br />
+  </div>
+<% end %>
+<br />
+
+<!-- try paginating? --->
+
+<!-- end user places --->
+
+
 <!-- start user comments --->
-<h1 class="text-center">My Comments</h1>
+<h1 class="text-center"><i>My Comments</i></h1>
 <br />
 <div class="row">
   <% @user.comments.each do |comment| %>
